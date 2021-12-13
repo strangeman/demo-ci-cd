@@ -22,6 +22,7 @@ jobs:
 
       - name: Get ssh key
         run: |
+          mkdir -p ~/.ssh/
           echo "$SSH_KEY" > ~/.ssh/ssh-key.pem
           chmod 600 ~/.ssh/staging.key
           cat >>~/.ssh/config <<END
