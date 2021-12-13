@@ -35,5 +35,5 @@ jobs:
           requirements: "roles/requirements.yml"
           # Optional, additional flags to pass to ansible-playbook
           options: |
-            --inventory inventory/
+            --inventory inventory/inventory.ini
             --extra-vars hello=${{ steps.vars.outputs.sha_short }}
