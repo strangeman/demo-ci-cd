@@ -1,0 +1,42 @@
+name: deploy
+
+on:
+  workflow_run:
+    workflows: "push"
+    branches:
+      - 'master'
+      - 'main'
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Declare some variables
+        id: vars
+        shell: bash
+        run: |
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+      - name: Get ssh key
+        run: |
+          echo "$SSH_KEY" > ~/.ssh/ssh-key.pem
+          chmod 600 ~/.ssh/staging.key
+          cat >>~/.ssh/config <<END
+          IdentityFile ~/.ssh/staging.key
+          StrictHostKeyChecking no
+          END
+        env:
+          SSH_KEY:  ${{ secrets.DEMO_SSH_KEY }}
+
+      - name: Run playbook
+        uses: saubermacherag/ansible-playbook-docker-action@v1.4
+        with:
+          playbookName: 'playbook.yml'
+          inventoryFile: 'inventory/inventory.ini'
+          requirementsFile: ".ansible/roles/requirements.yml"
+          rolesPath: ".ansible/roles"
+          keyFile: "~/.ssh/ssh-key.pem"
+          extraVars: "-e blog_commit_hash=${{ steps.vars.outputs.sha_short }}"

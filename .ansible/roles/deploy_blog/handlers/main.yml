@@ -1,0 +1,15 @@
+- name: Restart blog systemd unit
+  systemd:
+    name: blog
+    state: restarted
+    daemon_reload: yes
+
+- name: Test nginx config
+  command: "nginx -T"
+  notify: Reload nginx
+
+- name: Reload nginx
+  systemd:
+    name: nginx
+    state: reloaded
+    daemon_reload: yes

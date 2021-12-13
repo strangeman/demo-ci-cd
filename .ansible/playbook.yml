@@ -1,0 +1,8 @@
+- hosts: blog
+  become: true
+  roles:
+    - role: geerlingguy.nginx
+    - role: geerlingguy.docker
+    - role: deploy_blog
+  tags:
+    - blog

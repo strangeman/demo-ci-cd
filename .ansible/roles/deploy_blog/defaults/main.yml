@@ -1,0 +1,3 @@
+blog_image_name: "strangeman/pelican-blog"
+docker_host_port: 8080
+blog_domain: "demo.strangeman.info"

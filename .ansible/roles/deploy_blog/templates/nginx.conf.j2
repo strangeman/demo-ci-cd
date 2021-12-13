@@ -1,0 +1,14 @@
+server {
+    listen       80;
+    server_name  {{ blog_domain }} ;
+
+    ssl_dhparam          /etc/nginx/certs/dhparams.pem;
+
+    location ~ /\. {
+        deny all;
+    }
+
+    location / {
+        proxy_pass http://localhost:{{ docker_host_port }}/;
+    }
+}
