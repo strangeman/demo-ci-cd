@@ -14,20 +14,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      - uses: actions/checkout@v2
+
       - name: Declare some variables
         id: vars
         shell: bash
         run: |
           echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-
-      - name: Get ssh key
-        run: |
-          mkdir -p ~/.ssh/
-          cat >>~/.ssh/config <<END
-          StrictHostKeyChecking no
-          END
-        env:
-          SSH_KEY:  ${{ secrets.DEMO_SSH_KEY }}
 
       - name: Run playbook
         uses: dawidd6/action-ansible-playbook@v2
