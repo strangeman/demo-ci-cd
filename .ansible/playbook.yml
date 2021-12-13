@@ -4,5 +4,7 @@
     - role: geerlingguy.nginx
     - role: geerlingguy.docker
     - role: deploy_blog
+      tags:
+        - deploy_blog
   tags:
-    - blog
+    - install_blog
