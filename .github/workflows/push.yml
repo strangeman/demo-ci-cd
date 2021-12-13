@@ -52,6 +52,6 @@ jobs:
         with:
           context: .
           file: Dockerfile
-          cache-from: type=registry,ref=${{ env.IMAGE_NAME }}::${{ steps.vars.outputs.sha_short }}
+          cache-from: type=registry,ref=${{ env.IMAGE_NAME }}:cached
           push: true
-          tags: ${{ env.IMAGE_NAME }}:latest
+          tags: ${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.sha_short }}
