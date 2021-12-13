@@ -5,7 +5,7 @@ After=docker.service
 
 [Service]
 User=dockeruser
-ExecStart=/usr/bin/docker run --rm -n pelican-blog -p 127.0.0.1:{{ docker_host_port }}:8080  {{ blog_image_name }}:{{ blog_commit_hash }}
+ExecStart=/usr/bin/docker run --rm --name pelican-blog -p 127.0.0.1:{{ docker_host_port }}:8080  {{ blog_image_name }}:{{ blog_commit_hash }}
 Restart=on-abort
 
 [Install]
