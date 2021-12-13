@@ -32,8 +32,8 @@ jobs:
           # Optional, SSH private key
           key: ${{secrets.DEMO_SSH_KEY}}
           # Optional, galaxy requirements filepath
-          requirements: ".ansible/roles/requirements.yml"
+          requirements: "roles/requirements.yml"
           # Optional, additional flags to pass to ansible-playbook
           options: |
-            --inventory .ansible/inventory
+            --inventory inventory/
             --extra-vars hello=${{ steps.vars.outputs.sha_short }}
