@@ -23,21 +23,24 @@ jobs:
       - name: Get ssh key
         run: |
           mkdir -p ~/.ssh/
-          echo "$SSH_KEY" > ~/.ssh/ssh-key.pem
-          chmod 600 ~/.ssh/ssh-key.pem
           cat >>~/.ssh/config <<END
-          IdentityFile ~/.ssh/ssh-key.pem
           StrictHostKeyChecking no
           END
         env:
           SSH_KEY:  ${{ secrets.DEMO_SSH_KEY }}
 
       - name: Run playbook
-        uses: saubermacherag/ansible-playbook-docker-action@v1.4
+        uses: dawidd6/action-ansible-playbook@v2
         with:
-          playbookName: 'playbook.yml'
-          inventoryFile: 'inventory/inventory.ini'
-          requirementsFile: ".ansible/roles/requirements.yml"
-          rolesPath: ".ansible/roles"
-          keyFile: "~/.ssh/ssh-key.pem"
-          extraVars: "-e blog_commit_hash=${{ steps.vars.outputs.sha_short }}"
+          # Required, playbook filepath
+          playbook: playbook.yml
+          # Optional, directory where playbooks live
+          directory: ./.ansible
+          # Optional, SSH private key
+          key: ${{secrets.DEMO_SSH_KEY}}
+          # Optional, galaxy requirements filepath
+          requirements: ".ansible/roles/requirements.yml"
+          # Optional, additional flags to pass to ansible-playbook
+          options: |
+            --inventory .ansible/inventory
+            --extra-vars hello=${{ steps.vars.outputs.sha_short }}
