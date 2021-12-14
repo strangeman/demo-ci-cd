@@ -5,7 +5,7 @@
     daemon_reload: yes
 
 - name: Test nginx config
-  command: "nginx -T"
+  command: "nginx -t"
   notify: Reload nginx
 
 - name: Reload nginx
