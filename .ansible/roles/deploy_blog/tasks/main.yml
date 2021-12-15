@@ -7,14 +7,14 @@
   pip:
     name: docker
 
-- name: Add restricted user 
+- name: Add restricted user
   user:
     name: dockeruser
     group: docker
 
 - name: Pull image
   docker_image:
-    name: "{{ blog_image_name  }}"
+    name: "{{ blog_image_name }}"
     tag: "{{ blog_commit_hash }}"
     source: pull
 
