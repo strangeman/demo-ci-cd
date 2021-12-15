@@ -1,2 +1,4 @@
 geerlingguy.nginx
 geerlingguy.docker
+output
+__pycache__

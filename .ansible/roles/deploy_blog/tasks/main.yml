@@ -1,10 +1,16 @@
 ---
 - name: Check if commit is set
-  debug: "Deploy commit hash {{ blog_commit_hash }}"
+  debug: 
+    msg: "Deploy commit hash {{ blog_commit_hash }}"
 
 - name: Install docker pip package
   pip:
     name: docker
+
+- name: Add restricted user 
+  user:
+    name: dockeruser
+    group: docker
 
 - name: Pull image
   docker_image:

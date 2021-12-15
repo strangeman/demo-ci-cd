@@ -5,6 +5,6 @@
     - role: geerlingguy.docker
     - role: deploy_blog
       tags:
-        - deploy_blog
+        - deploy
   tags:
-    - install_blog
+    - install

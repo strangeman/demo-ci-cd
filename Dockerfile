@@ -11,6 +11,6 @@ RUN pelican content
 ##############################################
 FROM nginx:stable-alpine
 
-COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY docker/nginx/nginx.conf /etc/nginx/nginx.conf
 
 COPY --from=pelican_builder /app/output /data
