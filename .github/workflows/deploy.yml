@@ -37,4 +37,4 @@ jobs:
           options: |
             --inventory inventory/inventory.ini
             --extra-vars blog_commit_hash=${{ steps.vars.outputs.sha_short }}
-            --tags deploy
+#            --tags deploy
